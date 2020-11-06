@@ -2,3 +2,4 @@
 /quillt/*           https://quillt.netlify.app/:splat           200
 /bookdown/*         https://bookdown-pkg.netlify.app/:splat     200
 /blogdown/*         https://blogdown-pkg.netlify.app/:splat     200
+/rmarkdown/*        https://rmarkdown-pkg.netlify.app/:splat    200
