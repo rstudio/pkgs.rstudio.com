@@ -1,25 +1,82 @@
 ---
-title: "Packages"
+title: "Selected R Packages, from RStudio"
 description: |
-  A new article created using the Distill format.
-author:
-  - name: Nora Jones 
-    url: https://example.com/norajones
-    affiliation: Spacely Sprockets
-    affiliation_url: https://example.com/spacelysprokets
-date: "`r Sys.Date()`"
-output: distill::distill_article
+  A selection of open-source R packages developed and maintained by RStudio for the R community.
+output: 
+  distill::distill_article:
+    theme: theme.css
+repository_url: https://github.com/rstudio/pkgs.rstudio.com
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(codemetar)
+library(glue)
+library(reactable)
+library(rvest)
+library(htmltools)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web. 
+```{r import-redirects, include=FALSE}
+# read in the redirect file
+redirect_names <- c("pkg", "old_url", "status")
+pkgs <- readr::read_table("_redirects", 
+                          col_names = redirect_names) %>% 
+  mutate(pkg = str_sub(pkg, start = 2L, end = -3L)) %>% 
+  mutate(pkgs_url = glue("https://pkgs.rstudio.com/", "{pkg}", "/")) %>% 
+  mutate(hex_logo = glue("https://pkgs.rstudio.com/", "{pkg}", "/logo.png")) 
+```
 
-Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+```{r include=FALSE}
+get_title <- function(url){
+  page <- read_html(url)
+  page %>% 
+    html_nodes("meta[property='og:title']") %>%
+    magrittr::extract2(1) %>% 
+    html_attr("content") 
+}
 
+# test with one
+# get_title("http://pkgs.rstudio.com/distill")
 
+pkgs <- pkgs %>% 
+  mutate(title = map_chr(.x = pkgs_url, ~get_title(.x)))
 
+```
 
-
+```{r table, layout="l-body-outset"}
+# make the table
+pkgs %>% 
+  select(hex_logo, 
+         Package = pkg, 
+         About = title, 
+         pkgs_url) %>% 
+  reactable(
+    
+  # global reactable options
+  defaultSorted = "Package",
+  searchable = TRUE,
+  highlight = TRUE,
+  rowStyle = list(cursor = "pointer"),
+  theme = reactableTheme(
+    highlightColor = "#e6f3fc"),
+  
+  # formatting individual columns
+  columns = list(
+    Package = colDef(width = 150),
+  # Using htmltools to render a link
+    pkgs_url = colDef(cell = function(value) {
+      tags$a(href = value, target = "_blank", value)
+      },
+      name = "Reference"),
+    hex_logo = colDef(cell = function(value) {
+      image <- img(src = value, height = "50px")
+      tagList(
+        div(style = list(display = "inline-block"), image)
+      )
+      }, 
+      width = 75,
+      name = ""))
+  ) 
+```
