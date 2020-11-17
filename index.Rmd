@@ -73,10 +73,10 @@ pkgs %>%
     hex_logo = colDef(cell = function(value) {
       image <- img(src = value, height = "50px")
       tagList(
-        div(style = list(display = "inline-block"), image)
+        div(style = list(display = "inline-block", width = 75), 
+            image)
       )
       }, 
-      width = 75,
       name = ""))
   ) 
 ```
