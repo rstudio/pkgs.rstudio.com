@@ -10,11 +10,12 @@ repository_url: https://github.com/rstudio/pkgs.rstudio.com
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-library(tidyverse)
-library(codemetar)
+library(dplyr)
+library(stringr)
 library(glue)
-library(reactable)
 library(rvest)
+library(purrr)
+library(reactable)
 library(htmltools)
 ```
 
@@ -54,28 +55,28 @@ pkgs %>%
          pkgs_url) %>% 
   reactable(
     
-  # global reactable options
-  defaultSorted = "Package",
-  searchable = TRUE,
-  highlight = TRUE,
-  rowStyle = list(cursor = "pointer"),
-  theme = reactableTheme(
-    highlightColor = "#e6f3fc"),
-  
-  # formatting individual columns
-  columns = list(
-    Package = colDef(width = 150),
-  # Using htmltools to render a link
-    pkgs_url = colDef(cell = function(value) {
-      tags$a(href = value, target = "_blank", value)
+    # global reactable options
+    defaultSorted = "Package",
+    searchable = TRUE,
+    highlight = TRUE,
+    rowStyle = list(cursor = "pointer"),
+    theme = reactableTheme(
+      highlightColor = "#e6f3fc"),
+    
+    # formatting individual columns
+    columns = list(
+      Package = colDef(width = 150),
+      # Using htmltools to render a link
+      pkgs_url = colDef(cell = function(value) {
+        tags$a(href = value, target = "_blank", value)
       },
       name = "Reference"),
-    hex_logo = colDef(cell = function(value) {
-      image <- img(src = value, height = "50px")
-      tagList(
-        div(style = list(display = "inline-block", width = "43.3px"), 
-            image)
-      )
+      hex_logo = colDef(cell = function(value) {
+        image <- img(src = value, height = "50px")
+        tagList(
+          div(style = list(display = "inline-block", width = "43.3px"), 
+              image)
+        )
       }, 
       width = 75,
       name = ""))
