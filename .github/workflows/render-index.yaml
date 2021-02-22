@@ -14,6 +14,7 @@ jobs:
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      RENV_PATHS_ROOT: ~/Library/Application Support/renv
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -27,13 +28,14 @@ jobs:
       - name: Cache Renv packages
         uses: actions/cache@v2
         with:
-          path: $HOME/.local/share/renv
-          key: r-${{ hashFiles('renv.lock') }}
-          restore-keys: r-
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
       
       - name: Install packages
         run: | 
-          install.packages("renv")
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           renv::restore()
         shell: Rscript {0}
       
