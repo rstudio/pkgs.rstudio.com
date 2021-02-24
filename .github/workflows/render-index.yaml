@@ -1,0 +1,64 @@
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - 'index.Rmd'
+      - '_redirects'
+      - '.github/workflows/render-index.yaml'
+  pull_request:
+    branches: [master, main]
+    paths:
+      - 'index.Rmd'
+      - '_redirects'
+      - '.github/workflows/render-index.yaml'
+
+name: Render homepage
+
+jobs:
+  render:
+    name: Render homepage
+    runs-on: macOS-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      RENV_PATHS_ROOT: ~/Library/Application Support/renv
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          # checkout PR branch or push branch
+          ref: ${{ github.head_ref || github.ref }}
+        
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v1
+      
+      - name: Install Pandoc
+        uses: r-lib/actions/setup-pandoc@v1
+      
+      - name: Cache Renv packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+      
+      - name: Install packages
+        run: | 
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
+        shell: Rscript {0}
+      
+      - name: Render Rmarkdown files
+        run: rmarkdown::render("index.Rmd")
+        shell: Rscript {0}
+        
+      - name: Git status
+        run: git status
+      
+      - name: Commit results
+        run: |
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git add index.html
+          git commit -m 'Re-build index page'
+          git push
