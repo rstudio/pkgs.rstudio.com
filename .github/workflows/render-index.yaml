@@ -1,6 +1,12 @@
 on:
   push:
-    branches: [gha-build]
+    branches: [master, main]
+    paths:
+      - 'index.Rmd'
+      - '_redirects'
+      - '.github/workflows/render-index.yaml'
+  pull_request:
+    branches: [master, main]
     paths:
       - 'index.Rmd'
       - '_redirects'
@@ -18,6 +24,9 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+        with:
+          # checkout PR branch or push branch
+          ref: ${{ github.head_ref || github.ref }}
         
       - name: Setup R
         uses: r-lib/actions/setup-r@v1
@@ -42,6 +51,9 @@ jobs:
       - name: Render Rmarkdown files
         run: rmarkdown::render("index.Rmd")
         shell: Rscript {0}
+        
+      - name: Git status
+        run: git status
       
       - name: Commit results
         run: |
@@ -49,4 +61,4 @@ jobs:
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git add index.html
           git commit -m 'Re-build index page'
-          git push origin ${{ github.head_ref }} 
+          git push
