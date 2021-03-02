@@ -17,6 +17,15 @@ library(rvest)
 library(purrr)
 library(reactable)
 library(htmltools)
+
+# utils
+get_og_meta <- function(url, property = "title") {
+  html <- read_html(url)
+  html %>% 
+    html_node(glue("meta[property='og:{property}']")) %>%
+    html_attr("content")
+}
+
 ```
 
 ```{r import-redirects, include=FALSE}
@@ -24,26 +33,10 @@ library(htmltools)
 redirect_names <- c("pkg", "old_url", "status")
 pkgs <- readr::read_table("_redirects", 
                           col_names = redirect_names) %>% 
-  mutate(pkg = str_sub(pkg, start = 2L, end = -3L)) %>% 
-  mutate(pkgs_url = glue("https://pkgs.rstudio.com/", "{pkg}", "/")) %>% 
-  mutate(hex_logo = glue("https://pkgs.rstudio.com/", "{pkg}", "/logo.png")) 
-```
-
-```{r include=FALSE}
-get_title <- function(url){
-  page <- read_html(url)
-  page %>% 
-    html_nodes("meta[property='og:title']") %>%
-    magrittr::extract2(1) %>% 
-    html_attr("content") 
-}
-
-# test with one
-# get_title("http://pkgs.rstudio.com/distill")
-
-pkgs <- pkgs %>% 
-  mutate(title = map_chr(.x = pkgs_url, ~get_title(.x)))
-
+  mutate(pkg = str_sub(pkg, start = 2L, end = -3L), 
+         pkgs_url = glue("https://pkgs.rstudio.com/{pkg}/"),
+         hex_logo = map_chr(pkgs_url, get_og_meta, "image"),
+         title = map_chr(pkgs_url, get_og_meta, "title"))
 ```
 
 ```{r table, layout="l-body-outset"}
