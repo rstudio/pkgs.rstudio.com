@@ -33,6 +33,9 @@ get_og_meta <- function(url, property = "title") {
 redirect_names <- c("pkg", "old_url", "status")
 pkgs <- readr::read_table("_redirects", 
                           col_names = redirect_names) %>% 
+  # remove generic redirection
+  filter(pkg != "/*") %>%
+  # retrieve information
   mutate(pkg = str_sub(pkg, start = 2L, end = -3L), 
          pkgs_url = glue("https://pkgs.rstudio.com/{pkg}/"),
          hex_logo = map_chr(pkgs_url, get_og_meta, "image"),
