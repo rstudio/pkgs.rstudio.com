@@ -3,5 +3,13 @@
 /bookdown/*         https://bookdown-pkg.netlify.app/:splat     200
 /blogdown/*         https://blogdown-pkg.netlify.app/:splat     200
 /rmarkdown/*        https://rmarkdown-pkg.netlify.app/:splat    200
+/renv/*             https://rstudio.github.io/renv/:splat       200
+/rstudioapi/*       https://rstudio.github.io/rstudioapi/:splat 200
+/gt/*               https://gt.rstudio.com/:splat               200
+/bslib/*            https://rstudio.github.io/bslib/:splat      200
+/thematic/*         https://rstudio.github.io/thematic/:splat   200
+/blastula/*         https://rstudio.github.io/blastula/:splat   200
+/reticulate/*       https://rstudio.github.io/reticulate/:splat 200
+/learnr/*           https://pkgs.rstudio.com/learnr/:splat      200
 
 /*                  https://rstudio.github.io/:splat            200
