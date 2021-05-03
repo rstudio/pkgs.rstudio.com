@@ -1,8 +1,10 @@
-/distill/*          https://distill.netlify.app/:splat                      200
-/quillt/*           https://quillt.netlify.app/:splat                       200
-/bookdown/*         https://bookdown-pkg.netlify.app/:splat                 200
-/blogdown/*         https://blogdown-pkg.netlify.app/:splat                 200
-/rmarkdown/*        https://rmarkdown-pkg.netlify.app/:splat                200
-/gradethis/*        https://gradethis.netlify.app/:splat                    200
+/distill/*          https://distill.netlify.app/:splat           200
+/quillt/*           https://quillt.netlify.app/:splat            200
+/bookdown/*         https://bookdown-pkg.netlify.app/:splat      200
+/blogdown/*         https://blogdown-pkg.netlify.app/:splat      200
+/rmarkdown/*        https://rmarkdown-pkg.netlify.app/:splat     200
+/blastula/*         https://blastula-pkg.netlify.app/:splat      200
+/flexdashboard/*    https://flexdashboard-pkg.netlify.app/:splat 200
+/gradethis/*        https://gradethis.netlify.app/:splat         200
 
-/*                  https://rstudio.github.io/:splat                        200
+/*                  https://rstudio.github.io/:splat             200
