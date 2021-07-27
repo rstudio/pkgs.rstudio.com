@@ -6,5 +6,6 @@
 /blastula/*         https://blastula-pkg.netlify.app/:splat      200
 /flexdashboard/*    https://flexdashboard-pkg.netlify.app/:splat 200
 /gradethis/*        https://gradethis.netlify.app/:splat         200
+/rticles/*          https://rticles-pkg.netlify.app/:splat       200
 
 /*                  https://rstudio.github.io/:splat             200
