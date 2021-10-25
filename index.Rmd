@@ -59,7 +59,6 @@ pkgs %>%
   reactable(
     
     # global reactable options
-    defaultSorted = "Package",
     searchable = TRUE,
     highlight = TRUE,
     rowStyle = list(cursor = "pointer"),
