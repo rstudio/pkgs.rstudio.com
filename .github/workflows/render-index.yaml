@@ -17,10 +17,9 @@ name: Render homepage
 jobs:
   render:
     name: Render homepage
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      RENV_PATHS_ROOT: ~/Library/Application Support/renv
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -30,23 +29,15 @@ jobs:
         
       - name: Setup R
         uses: r-lib/actions/setup-r@v1
-      
+        with:
+          use-public-rspm: true
+        
       - name: Install Pandoc
         uses: r-lib/actions/setup-pandoc@v1
-      
-      - name: Cache Renv packages
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.RENV_PATHS_ROOT }}
-          key: ${{ runner.os }}-renv-${{ hashFiles('renv.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-renv-
-      
-      - name: Install packages
-        run: | 
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-          renv::restore()
-        shell: Rscript {0}
+        with: 
+          pandoc-version: '2.14.2'
+
+      - uses: r-lib/actions/setup-renv@master
       
       - name: Render Rmarkdown files
         run: rmarkdown::render("index.Rmd")
