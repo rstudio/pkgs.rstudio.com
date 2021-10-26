@@ -38,6 +38,8 @@ jobs:
           pandoc-version: '2.14.2'
 
       - uses: r-lib/actions/setup-renv@master
+        env:
+          RENV_CONFIG_REPOS_OVERRIDE: ${{ env.RSPM }}
       
       - name: Render Rmarkdown files
         run: rmarkdown::render("index.Rmd")
