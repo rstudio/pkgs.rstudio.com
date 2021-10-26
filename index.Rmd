@@ -19,11 +19,18 @@ library(reactable)
 library(htmltools)
 
 # utils
-get_og_meta <- function(url, property = "title") {
-  html <- read_html(url)
-  html %>% 
-    html_node(glue("meta[property='og:{property}']")) %>%
-    html_attr("content")
+get_og_meta <- function(url, property = "title", default = "") {
+  ret <- tryCatch({
+    html <- read_html(url)
+    html %>% 
+      html_node(glue("meta[property='og:{property}']")) %>%
+      html_attr("content")
+  }, error = function(err) {
+    message(url, ": ", err$message)
+    NA_character_
+  })
+  
+  if (!is.na(ret)) ret else default
 }
 
 ```
@@ -38,7 +45,7 @@ pkgs <- readr::read_table("_redirects",
   # retrieve information
   mutate(pkg = str_sub(pkg, start = 2L, end = -3L), 
          pkgs_url = glue("https://pkgs.rstudio.com/{pkg}/"),
-         hex_logo = map_chr(pkgs_url, get_og_meta, "image"),
+         hex_logo = map_chr(pkgs_url, get_og_meta, "image", default = "hex-placeholder.svg"),
          title = map_chr(pkgs_url, get_og_meta, "title"))
 ```
 
@@ -52,7 +59,6 @@ pkgs %>%
   reactable(
     
     # global reactable options
-    defaultSorted = "Package",
     searchable = TRUE,
     highlight = TRUE,
     rowStyle = list(cursor = "pointer"),
