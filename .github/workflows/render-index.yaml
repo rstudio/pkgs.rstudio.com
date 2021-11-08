@@ -11,6 +11,7 @@ on:
       - 'index.Rmd'
       - '_redirects'
       - '.github/workflows/render-index.yaml'
+  workflow_dispatch:
 
 name: Render homepage
 
