@@ -34,7 +34,7 @@ jobs:
           use-public-rspm: true
         
       - name: Install Pandoc
-        uses: r-lib/actions/setup-pandoc@v1
+        uses: r-lib/actions/setup-pandoc@v2
         with: 
           pandoc-version: '2.15'
 
