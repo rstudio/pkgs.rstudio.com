@@ -146,3 +146,11 @@ reactable(
 Proudly supported by
 [![](https://www.rstudio.com/assets/img/posit-logo-fullcolor-TM.svg){fig-alt="Posit" width=65px}](https://posit.co)
 :::
+
+```{=html}
+<style>
+.rt-td-inner {
+    align-self: center;
+}
+</style>
+```
