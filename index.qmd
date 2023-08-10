@@ -102,6 +102,8 @@ pkgs_tbl <- pkgs %>% select(hex_logo, pkg, about, url = url_pkgs)
 
 reactable(
   data = pkgs_tbl,
+  elementId = "pkgs-table",
+  static = TRUE,
 
   # global reactable options
   searchable = TRUE,
