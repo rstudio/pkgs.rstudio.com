@@ -20,6 +20,7 @@ Imports:
     rvest,
     stringr,
     tidyr,
+    V8,
     yaml
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
