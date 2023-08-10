@@ -41,7 +41,7 @@ jobs:
       - uses: r-lib/actions/setup-renv@v2
         env:
           RENV_CONFIG_REPOS_OVERRIDE: ${{ env.RSPM }}
-          RENV_CONFIG_SANDBOX_ENABLED: false
+          RENV_CONFIG_SANDBOX_ENABLED: FALSE
 
       - name: Render Rmarkdown files
         run: rmarkdown::render("index.Rmd")
