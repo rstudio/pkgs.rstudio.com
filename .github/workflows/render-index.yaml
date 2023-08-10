@@ -33,19 +33,17 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install Pandoc
-        uses: r-lib/actions/setup-pandoc@v2
-        with:
-          pandoc-version: '2.15'
+          - uses: r-lib/actions/setup-renv@v2
+          env:
+            RENV_CONFIG_REPOS_OVERRIDE: ${{ env.RSPM }}
+            RENV_CONFIG_SANDBOX_ENABLED: FALSE
 
-      - uses: r-lib/actions/setup-renv@v2
-        env:
-          RENV_CONFIG_REPOS_OVERRIDE: ${{ env.RSPM }}
-          RENV_CONFIG_SANDBOX_ENABLED: FALSE
+      - uses: quarto-dev/quarto-actions/setup@v2
 
       - name: Render Rmarkdown files
-        run: rmarkdown::render("index.Rmd")
-        shell: Rscript {0}
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          path: index.qmd
 
       - name: Git status
         run: git status
