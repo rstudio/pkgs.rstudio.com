@@ -1,0 +1,26 @@
+Type: Project
+Package: pkgs.rstudio.com
+Title: Website for Posit Packages
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Garrick", "Aden-Buie", , "garrick@adenbuie.com", role = "aut"),
+    person("Christophe", "Dervieux", , "cderv@posit.co", role = c("cre", "aut"))
+  )
+Description: Website for posit packages.
+License: MIT + file LICENSE
+Imports:
+    dplyr,
+    glue,
+    htmltools,
+    knitr,
+    purrr,
+    reactable,
+    readr,
+    rmarkdown,
+    rvest,
+    stringr,
+    tidyr,
+    yaml
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
