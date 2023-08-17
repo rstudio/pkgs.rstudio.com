@@ -1,0 +1,41 @@
+# {package}:
+#   url:
+#     host: {url_where_actually_hosted}
+#     pkgs: {url_on_pkgs_if_not_pkgs.rstudio.com/package}
+#   about: ~
+#   hex_logo: {url_to_hex_sticker}
+
+rmarkdown:
+  url:
+    host: https://rmarkdown-pkg.netlify.app/
+bookdown:
+  url:
+    host: https://bookdown-pkg.netlify.app/
+blogdown:
+  url:
+    host: https://blogdown-pkg.netlify.app/
+flexdashboard:
+  url:
+    host: https://rstudio.github.io/flexdashboard/
+blastula:
+  url:
+    host: https://blastula-pkg.netlify.app/
+distill:
+  url:
+    host: https://distill.netlify.app/
+rticles:
+  url:
+    host: https://rticles-pkg.netlify.app/
+gradethis:
+  url:
+    host: https://gradethis.netlify.app/
+  hex_logo: https://pkgs.rstudio.com/gradethis/logo.png
+ggcheck:
+  url:
+    host: https://ggcheck-pkg.netlify.app/
+tblcheck:
+  url:
+    host: https://tblcheck-pkg.netlify.app/
+quillt:
+  url:
+    host: https://quillt.netlify.app/
