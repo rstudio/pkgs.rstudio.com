@@ -33,6 +33,9 @@ library(purrr)
 library(reactable)
 library(htmltools)
 
+# Don't include the version number in the htmlwidgets dependency
+options(htmltools.dir.version = FALSE)
+
 # utils
 get_og_meta <- function(url, property = "title", default = "") {
   ret <- tryCatch({

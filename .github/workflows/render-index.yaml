@@ -39,6 +39,9 @@ jobs:
 
       - uses: quarto-dev/quarto-actions/setup@v2
 
+      - name: Clean assets
+        run: rm -rf index_files/
+
       - name: Render Rmarkdown files
         uses: quarto-dev/quarto-actions/render@v2
         with:
