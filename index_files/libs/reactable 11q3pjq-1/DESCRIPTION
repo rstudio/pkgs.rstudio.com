@@ -54,12 +54,12 @@ Author: Greg Lin [aut, cre],
   James Halliday [ctb, cph] (stream-browserify library),
   Posit Software, PBC [fnd, cph]
 Maintainer: Greg Lin <glin@glin.io>
-Repository: CRAN
+Repository: RSPM
 Date/Publication: 2023-03-12 10:00:10 UTC
-Built: R 4.3.0; ; 2023-04-11 04:46:36 UTC; unix
+Built: R 4.3.0; ; 2023-04-22 00:04:53 UTC; unix
 RemoteType: standard
 RemotePkgRef: reactable
 RemoteRef: reactable
-RemoteRepos: https://cran.rstudio.com/
-RemotePkgPlatform: aarch64-apple-darwin20
+RemoteRepos: https://packagemanager.posit.co/cran/__linux__/jammy/latest
+RemotePkgPlatform: x86_64-pc-linux-gnu-ubuntu-22.04
 RemoteSha: 0.4.4
