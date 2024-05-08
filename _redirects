@@ -4,7 +4,6 @@
 /blogdown/*         https://blogdown-pkg.netlify.app/:splat      200
 /rmarkdown/*        https://rmarkdown-pkg.netlify.app/:splat     200
 /blastula/*         https://blastula-pkg.netlify.app/:splat      200
-/flexdashboard/*    https://flexdashboard-pkg.netlify.app/:splat 200
 /gradethis/*        https://gradethis.netlify.app/:splat         200
 /rticles/*          https://rticles-pkg.netlify.app/:splat       200
 /ggcheck/*          https://ggcheck-pkg.netlify.app/:splat       200
