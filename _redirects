@@ -9,5 +9,6 @@
 /rticles/*          https://rticles-pkg.netlify.app/:splat       200
 /ggcheck/*          https://ggcheck-pkg.netlify.app/:splat       200
 /tblcheck/*         https://tblcheck-pkg.netlify.app/:splat      200
+/connectapi/*       https://posit-dev.github.io/:splat           200
 
 /*                  https://rstudio.github.io/:splat             200
